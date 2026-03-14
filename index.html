@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github Issues Tracher | Login</title>
+    <title>Github Issues Tracker | Login</title>
     <link rel="shortcut icon" href="assets/github-logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -20,15 +20,31 @@
 </head>
 <body class="bg-[#F8FAFC] min-h-screen flex items-center justify-center">
     <fieldset class="fieldset bg-white border-base-300 rounded-box w-xs border p-4 mx-auto">
-  <legend class="fieldset-legend">Login</legend>
+        <div class="items-center text-center mx-auto">
+            <img class="mx-auto h-[100px] w-[100px]" src="assets/github-logo.png" alt="">
+            <h1 class="mt-6 text-[##64748B] text-2xl font-semibold">GitHub Issues Tracker</h1>
+            <p class="mt-1 text-[##64748B] text-xl">Sign in to manage your issues</p>
+        </div>
+        <div class="mt-2">
+  <label class="label text-[#1F2937] black font-medium text-[16px] py-1">Username</label>
+  <input type="username" class="input w-95 rounded-md " placeholder="Enter Username" />
+  <p class="text-xs text-blue-600 mt-1">Default: admin</p>
+    </div>
+    <div>        
+  <label class="label text-[16px] py-1 text-[#1F2937] font-medium">Password</label>
+  <input type="password" class="input w-full rounded-md" placeholder="Enter Password" />
+  <p class="text-xs text-blue-600 mt-1">Default: admin123</p>
+   </div>     
+  <button class="btn w-full btn-primary mt-4 rounded-md">Sign in</button>
 
-  <label class="label">Email</label>
-  <input type="email" class="input" placeholder="Email" />
-
-  <label class="label">Password</label>
-  <input type="password" class="input" placeholder="Password" />
-
-  <button class="btn btn-neutral mt-4">Login</button>
+<div class="my-5 text-gray-400 text-sm divider">OR</div>
+<p class="text-gray-500 mb-2 text-center">Demo Credentials:</p>
+<div class="bg-gray-100 p-4 rounded-md text-sm">
+<div class="text-center">
+<p><b>Username:</b> admin</p>
+<p><b>Password:</b> admin123</p>
+</div>
+</div>
 </fieldset>
 </body>
 </html>

@@ -5,9 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Github Issues Tracker | Login</title>
     <link rel="shortcut icon" href="assets/github-logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+<style>
+    *{
+        font-family: "Geist", sans-serif;
+    }
+</style>
 </head>
-<body>
-    <h1>Github Issues Tracker</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, ex?</p>
+
+<body class="bg-[#F8FAFC] min-h-screen">
+    <header class="mx-auto">
+        <div class="navbar bg-base-100 shadow-sm w-full px-20">
+  <div class="flex-1">
+    <div class="flex"> 
+        <img class="w-[36px] h-[37px]" src="assets/github-logo.png" alt="">
+    <a class="btn btn-ghost text-xl">GitHub Issues Tracker </a></div>
+   
+  </div>
+  <div class="flex gap-2">
+    <div class="flex items-center gap-2 border border-gray-200 rounded-md px-2">
+  <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+  <input type="text" placeholder="Search issues..." class="input border-0 focus:outline-none" />
+</div>
+        <button class="btn btn-md btn-primary"><i class="fa-solid fa-plus"></i> New Issue</button>
+    </div>
+  </div>
+    </header>
+
 </body>
 </html>

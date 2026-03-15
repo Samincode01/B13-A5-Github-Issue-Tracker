@@ -30,9 +30,9 @@
   <div class="flex gap-2">
     <div class="flex items-center gap-2 border border-gray-200 rounded-md px-2">
   <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-  <input type="text" placeholder="Search issues..." class="input border-0 focus:outline-none" />
+  <input id="search-input" type="text" placeholder="Search issues..." class="input border-0 focus:outline-none" />
 </div>
-        <button class="btn btn-md btn-primary"><i class="fa-solid fa-plus"></i> New Issue</button>
+        <button id="search-btn" class="btn btn-md btn-primary">Search</button>
     </div>
   </div>
     </header>
@@ -80,6 +80,24 @@
   
 
 </section>
+
+<section>
+            <!-- Open the modal using ID.showModal() method -->
+            <dialog id="issue_details" class="modal">
+                <div class="modal-box">
+                    
+                        <div id="details-container"></div>
+
+                        <form method="dialog">
+                            <!-- if there is a button in form, it will close the modal -->
+                            <button class="btn btn-primary">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+         </section>
+         
+    </section>
 <script src="main.js"></script>
 </body>
 </html>

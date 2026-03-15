@@ -24,6 +24,26 @@ const labelStyles = {
   documentation: "bg-blue-100 text-blue-500 border-blue-300",
 };
 
+const setCounter = (status) =>{
+    const counter = document.getElementById("issueNum");
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+    .then(res=> res.json())
+    .then(data => {
+        const issues = data.data;
+        if(status === 'all'){
+            counter.innerText = `${issues.length} issues`;
+            return;
+        }
+        else{
+            const filteredIssues = issues.filter(issue => issue.status === status);
+            counter.innerText = `${filteredIssues.length} issues`;
+            return;
+        }
+
+    })
+};
+
 const displayLabel = (labels) => {
   if (!labels || labels.length === 0) return "";
 
@@ -48,7 +68,7 @@ const borderColor = (status) => {
     return "#22C55E";
   } 
   else if (status === "closed") {
-    return "#EF4444";
+    return "#A855F7";
   }
 };
 //function to toggle status styles based on clicking button
@@ -62,16 +82,14 @@ const toggleStatus = (clickedTab) => {
 const loadIssues=()=>
 {
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
-    fetch(url)
-    .then((res) => res.json())
-    .then((data) => 
+    fetch(url)                  
+    .then((res) => res.json())  
+    .then((data) =>             
       displayAllIssues(data.data));
 }
 
 const displayAllIssues=(issues)=>
 {
-    const allIssue= document.getElementById("issueNum")
-    allIssue.innerText=`${issues.length} issue`
     const issuesContainer = document.getElementById("cardContainer")
     issuesContainer.innerHTML=""
     issues.forEach((issue) => {
@@ -135,4 +153,60 @@ class="h-full flex flex-col justify-between rounded-lg bg-white shadow-sm border
     
 }
 
+//function to load issue details by clicking on issue card
+const loadDetails = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+    .then(res=> res.json())
+    .then(data => displayDetails(data.data));
+};
+
+//function to display details with a modal
+const displayDetails = (issues) => {
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML = `
+        <!-- details card  -->
+            <div class="bg-white w-11/12 max-w-[700px] mx-auto rounded-lg p-6 space-y-6">
+                <h1 class="text-xl font-bold text-[#1F2937]">${issues.title}</h1>
+
+                <div class="flex gap-3 flex-col md:flex-row justify-center items-center md:justify-start">
+                    <span class="px-3 py-2 rounded-full bg-[${borderColor(issues.status)}] text-white text-xs font-medium w-fit">${issues.status.toUpperCase()}</span>
+                    <span class="text-[#64748B] text-xs">Opened by ${issues.author}</span>
+                    <span class="text-[#64748B] text-xs">${issues.updatedAt}</span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div class="flex flex-col md:flex-row gap-2"> ${displayLabel(issues.labels)} </div>
+                </div>
+
+                <p class="text-base text-[#64748B]">${issues.description}</p>
+
+                <div class="bg-[#F8FAFC] rounded-lg p-6 flex justify-between">
+                    <div class="space-y-2">
+                        <p class="text-base text-[#64748B]">Assignee:</p>
+                        <h3 class="text-base font-semibold text-[#1F2937]">${issues.assignee}</h3>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-base text-[#64748B]">Priority</p>
+                        <p class="w-fit px-8 py-2 rounded-full text-xs font-medium ${priorityColor(issues.priority)} ${issues.priority}">${issues.priority.toUpperCase()}</p>
+                    </div>
+                </div>
+            </div>
+    `;
+    document.getElementById("issue_details").showModal();
+}
+document.getElementById("search-btn").addEventListener('click',()=>{
+const searchInput = document.getElementById("search-input")
+const searchValue = searchInput.value.trim().toLowerCase()
+if(searchValue === ''){
+        alert('Enter a word to search');
+        return;
+    }
+fetch(
+      `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`,
+    )
+    .then(res=>res.json())
+    .then(data => displayAllIssues(data.data));
+})
+setCounter(activeStatus)
 loadIssues();

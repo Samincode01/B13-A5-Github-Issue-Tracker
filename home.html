@@ -38,27 +38,48 @@
     </header>
 <section id="filter-btn" class="flex justify-center mt-10">
 
-  <div class="w-[50%] bg-white border border-gray-200 rounded-md p-6 gap-10 shadow-sm">
+  <div class="w-[80%] bg-white border border-gray-200 rounded-md gap-10 shadow-sm">
 
 
 
-      <button class="px-6 py-2 text-sm font-medium rounded-md text-slate-600 border border-gray-200 hover:bg-primary hover:text-white cursor-pointer">
-        All
-      </button>
-
-      <button class="px-6 py-2 text-sm font-medium rounded-md text-slate-600 border border-gray-200 hover:bg-primary hover:text-white cursor-pointer">
-        Open
-      </button>
-
-     <button class="px-6 py-2 text-sm font-medium rounded-md text-slate-600 border border-gray-200 hover:bg-primary hover:text-white cursor-pointer">
-        Closed
-      </button>
+     <div id="status-tabs" class="flex bg-base-100 p-4 gap-5 justify-center md:justify-start">
+            <button value="all" class="status-btn btn btn-primary md:w-28" type="button">All</button>
+            <button value="open" class="status-btn btn md:w-28" type="button">Open</button>
+            <button value="closed" class="status-btn md:w-28 btn" type="button">Closed</button>
+        </div>
 
 
   </div>
 
 </section>
 
+<section id="total-issues">
+  <div class="w-[80%] bg-white border border-gray-200 rounded-md p-6 gap-10 shadow-sm flex justify-between mt-4 mx-auto">
+    <div class="flex gap-1 items-center">
+      <img class="h-[32px] w-[32px]"src="assets/Aperture.png" alt="">
+      <div>
+        <h1 id="issueNum" class="font-semibold text-[#1F2937] text-xl"></h1>
+      <p class="text-xs text-[#64748B]">Track and manage your project issues</p>
+      </div>
+      
+    </div>
+    <div class="flex gap-4 items-center">
+      <div class="flex gap-1">
+        <img class="h-[45%] w-[45%]" src="assets/open-Status.png" alt="">
+        <span class="font-medium text-[16px] text-[#1F2937]">Open</span>
+      </div>
+      <div class="flex gap-1">
+        <img class="h-[45%] w-[45%]" src="assets/closed-status.png" alt="">
+        <span class="font-medium text-[16px] text-[#1F2937]">Close</span>
+      </div>
+    </div>
+    </div>
 </section>
+
+<section id="cardContainer" class="w-[80%] mx-auto my-2 grid grid-cols-1 md:grid-cols-3 gap-5 sm:grid grid-rows-2">
+  
+
+</section>
+<script src="main.js"></script>
 </body>
 </html>

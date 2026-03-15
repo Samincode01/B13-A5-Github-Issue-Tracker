@@ -174,13 +174,23 @@ class="h-full flex flex-col justify-between rounded-lg bg-white shadow-sm border
 }
 
 const filterIssues = (status) => {
-  if (status === "all") {
-    displayAllIssues(allIssues);
-    return;
-  }
 
-  const filtered = allIssues.filter(issue => issue.status === status);
-  displayAllIssues(filtered);
+  manageSpinner(true);
+
+  setTimeout(() => {
+
+    if (status === "all") {
+      displayAllIssues(allIssues);
+      manageSpinner(false);
+      return;
+    }
+
+    const filtered = allIssues.filter(issue => issue.status === status);
+    displayAllIssues(filtered);
+    manageSpinner(false);
+
+  }, 300);
+
 };
 
 //function to load issue details by clicking on issue card

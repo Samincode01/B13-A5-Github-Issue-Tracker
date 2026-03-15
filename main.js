@@ -1,3 +1,4 @@
+let allIssues = [];
 let activeStatus = "all";
 const statusTabs = document.querySelectorAll(".status-btn");
 statusTabs.forEach((tab) => {
@@ -5,10 +6,25 @@ statusTabs.forEach((tab) => {
     activeStatus = tab.value;
 
     toggleStatus(tab);
-    loadIssues(activeStatus);
+    filterIssues(activeStatus);
     setCounter(activeStatus);
   });
 });
+
+const manageSpinner = (status) => {
+
+  const spinner = document.getElementById("spinner");
+  const cards = document.getElementById("cardContainer");
+
+  if (status) {
+    spinner.classList.remove("hidden");
+    cards.classList.add("hidden");
+  } else {
+    spinner.classList.add("hidden");
+    cards.classList.remove("hidden");
+  }
+
+};
 
 const priorityColor = (priority) => {
   if (priority === "high") return "bg-[#FEECEC] text-[#EF4444]";
@@ -79,14 +95,18 @@ const toggleStatus = (clickedTab) => {
   clickedTab.classList.add("btn-primary");
 };
 
-const loadIssues=()=>
-{
-    const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues"
-    fetch(url)                  
-    .then((res) => res.json())  
-    .then((data) =>             
-      displayAllIssues(data.data));
-}
+const loadIssues = () => {
+  const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
+manageSpinner(true);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      allIssues = data.data;
+      filterIssues(activeStatus);
+      manageSpinner(false);
+    });
+};
+
 
 const displayAllIssues=(issues)=>
 {
@@ -153,6 +173,16 @@ class="h-full flex flex-col justify-between rounded-lg bg-white shadow-sm border
     
 }
 
+const filterIssues = (status) => {
+  if (status === "all") {
+    displayAllIssues(allIssues);
+    return;
+  }
+
+  const filtered = allIssues.filter(issue => issue.status === status);
+  displayAllIssues(filtered);
+};
+
 //function to load issue details by clicking on issue card
 const loadDetails = (id) => {
     fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
@@ -186,8 +216,8 @@ const displayDetails = (issues) => {
                         <h3 class="text-base font-semibold text-[#1F2937]">${issues.assignee}</h3>
                     </div>
 
-                    <div class="space-y-2">
-                        <p class="text-base text-[#64748B]">Priority</p>
+                    <div class="space-y-2 text-center">
+                        <p class="text-base text-[#64748B]">   Priority</p>
                         <p class="w-fit px-8 py-2 rounded-full text-xs font-medium ${priorityColor(issues.priority)} ${issues.priority}">${issues.priority.toUpperCase()}</p>
                     </div>
                 </div>
@@ -208,5 +238,7 @@ fetch(
     .then(res=>res.json())
     .then(data => displayAllIssues(data.data));
 })
+
+
 setCounter(activeStatus)
 loadIssues();
